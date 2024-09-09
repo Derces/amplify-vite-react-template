@@ -19,10 +19,18 @@ function App() {
   function createTodo() {
     client.models.Todo.create({ content: window.prompt("Todo content") });
   }
+  
+  const formFields = {
+    signUp: {
+      "custom:tenant_id": {
+        label: 'Input Tenant',
+        order: 1
+      }
+    }
+  };
 
   return (
-
-    <Authenticator>
+    <Authenticator  formFields={formFields}>
       {({ signOut }) => (
         <main>
           <h1>My todos</h1>
@@ -32,13 +40,6 @@ function App() {
               <li key={todo.id}>{todo.content}</li>
             ))}
           </ul>
-          <div>
-            🥳 App successfully hosted. Try creating a new todo.
-            <br />
-            <a href="https://docs.amplify.aws/react/start/quickstart/#make-frontend-updates">
-              Review next step of this tutorial.
-            </a>
-          </div>
           <button onClick={signOut}>Sign out</button>
         </main>
 

@@ -14,17 +14,16 @@ const schema = a.schema({
     })
     .authorization((allow) => [allow.owner().identityClaim('custom:tenant_id')]),
 
-  LabelData: a
-    .model({
-      Id: a.string(),
-      ColumnKey: a.string(),
-      PrintOrderNo: a.string(),
-      printData: a.string(),
-      tenant_id: a.string(),
+  // LabelData: a
+  //   .model({
+  //     Id: a.string(),
+  //     ColumnKey: a.string(),
+  //     PrintOrderNo: a.string(),
+  //     printData: a.string(),
+  //     tenant_id: a.string(),
 
-    })
-    .authorization((allow) => [allow.owner().identityClaim('custom:tenant_id')]),
-
+  //   })
+  //   .authorization((allow) => [allow.publicApiKey()]),
 });
 
 export type Schema = ClientSchema<typeof schema>;
@@ -32,7 +31,7 @@ export type Schema = ClientSchema<typeof schema>;
 export const data = defineData({
   schema,
   authorizationModes: {
-    defaultAuthorizationMode: "apiKey",
+    defaultAuthorizationMode: 'userPool',
     // API Key is used for a.allow.public() rules
     apiKeyAuthorizationMode: {
       expiresInDays: 30,
