@@ -12,18 +12,25 @@ const schema = a.schema({
       content: a.string(),
       tenant_id:a.string()
     })
-    .authorization((allow) => [allow.owner().identityClaim('custom:tenant_id')]),
+    .authorization((allow) => [allow.ownerDefinedIn('tenantId').identityClaim('custom:tenant_id')]),
+  
+    Item: a
+    .model({
+      ItemCode: a.string(),
+      ItemName: a.string(),
+      tenant_id: a.string(),
+    })
+    .authorization((allow) => [allow.ownerDefinedIn('tenantId').identityClaim('custom:tenant_id')]),
 
-  // LabelData: a
-  //   .model({
-  //     Id: a.string(),
-  //     ColumnKey: a.string(),
-  //     PrintOrderNo: a.string(),
-  //     printData: a.string(),
-  //     tenant_id: a.string(),
-
-  //   })
-  //   .authorization((allow) => [allow.publicApiKey()]),
+  LabelData: a
+    .model({
+      Id: a.string(),
+      ColumnKey: a.string(),
+      PrintOrderNo: a.string(),
+      printData: a.string(),
+      tenant_id: a.string(),
+    })
+    .authorization((allow) => [allow.ownerDefinedIn('tenantId').identityClaim('custom:tenant_id')]),
 });
 
 export type Schema = ClientSchema<typeof schema>;
