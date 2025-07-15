@@ -4,7 +4,9 @@ import { data } from './data/resource';
 const backend = defineBackend({
   auth,
   data,
-});
+}
+);
+
 const { cfnUserPool } = backend.auth.resources.cfnResources
 cfnUserPool.userPoolAddOns = {
   advancedSecurityMode: "AUDIT"
